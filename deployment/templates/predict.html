@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <title>Sea Animals Classifier</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/predict"><strong>Predict</strong></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/statistics">Statistics</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <h1 class="w-50 mx-auto m-5 text-center">Welcome to Sea Animals Classifier</h1>
+
+        <form class="w-50 mx-auto m-3" action="/predict" method="post" enctype="multipart/form-data">
+            <label class="h5 text-left">Step 1: Upload a marine animal image.</label>
+            <input class="form-control" type="file" name="imagefile">
+            <label class="h5 text-left mt-3">Step 2: Click the predict button to start.</label>
+            <br>
+            <input class="btn btn-primary" type="submit" value="Predict">
+        </form>
+        {% if pred_eff and pred_dense and not error %}
+            <h5 class="h5 w-50 mx-auto text-left mt-3">Step 3: The outcome will be shown below.</h5>
+        {% endif %}
+        <div class="container w-50 mx-auto">
+            <div class="row">
+                <div class="col">
+                    {% if pred_eff %}
+                        <h3>EfficientNetB3</h3>
+                        <p><strong>Top 5 predictions</strong></p>
+                        <ol>
+                            {% for prediction in pred_eff %}
+                                <li>{{ prediction.label }}: {{ "%.6f" | format(prediction.probability * 100) }}%</li>
+                            {% endfor %}
+                        </ol>
+                    {% endif %}
+                    {% if error %}
+                        <p class="text-center">Error: {{error}}</p>
+                    {% endif %}
+                </div>
+                <div class="col">
+                    {% if pred_dense %}
+                        <h3>DenseNet201</h3>
+                        <p><strong>Top 5 predictions</strong></p>
+                        <ol>
+                            {% for prediction in pred_dense %}
+                                <li>{{ prediction.label }}: {{ "%.6f" | format(prediction.probability * 100) }}%</li>
+                            {% endfor %}
+                        </ol>
+                    {% endif %}
+                    {% if error %}
+                        <p class="text-center">Error: {{error}}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {% if pred_eff and pred_dense and not error %}
+            <form class="w-50 mx-auto m-3" action="/submit" method="post">
+                <!-- <input type="hidden" name="eff_preds" value={{ pred_eff_str }}>
+                <input type="hidden" name="dense_preds" value={{ pred_dense_str }}> -->
+                <label class="h5 text-left w-50 mx-auto mt-3">Step 4: Select the actual label.</label>
+                <div class="input-group">
+                    <select class="custom-select w-50" name="actual_label">
+                        <option selected>Choose...</option>
+                        {% for i in labels %}
+                            <option value={{ i }}>{{ labels[i] }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        {% endif %}
+    </body>
+</html>
