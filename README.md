@@ -45,7 +45,7 @@ This repository contains a Jupyter Notebook implementing a machine learning mode
 
 4. **Evaluation & Validation:**
 
-   - Use multiple metrics (accuracy, precision, recall, F1-score) for performance assessment
+   - Use weighted precision for performance assessment
    - Conduct cross-validation to ensure robustness
 
 5. **Model Deployment:**
