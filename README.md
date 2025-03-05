@@ -76,6 +76,24 @@ To run this project locally, ensure you have Python installed and then follow th
    ```
 5. Open `sea_animals_classifier.ipynb` and run the cells.
 
+## Screenshots
+### Simple Flask Application
+<img src="https://drive.google.com/uc?id=1lQVWVbFwBVwy_JRipfxeoFLfV6yXLVuE" width="600px" />
+<img src="https://drive.google.com/uc?id=1e3fawVOlc5XFnAwg-yiz-yLEB2di3DYi" width="600px" />
+
+## Model Performance Comparison
+
+| Model             | Weighted Prec.  | Top-1 Prec.      | Top-5 Prec.      | Loss         |
+|------------------|---------------|----------------|----------------|-------------|
+| DenseNet-201     | 84.73%        | 90.60%         | 96.94%         | 0.55563     |
+| **DenseNet-201** | **89.79%** (↑ 5.06%) | **93.13%** (↑ 2.53%) | **98.03%** (↑ 1.09%) | **0.38890** (↓ 0.16673) |
+| EfficientNet-B3  | 83.80%        | 91.77%         | 96.21%         | 0.61064     |
+| **EfficientNet-B3** | **86.50%** (↑ 2.70%) | **92.61%** (↑ 0.84%) | **97.30%** (↑ 1.09%) | **0.49626** (↓ 0.11438) |
+| ResNet-152       | 78.68%        | 88.01%         | 94.39%         | 0.79901     |
+| **ResNet-152**   | **78.43%** (↓ 0.25%) | **85.45%** (↓ 2.56%) | **94.39%** | **0.80210** (↑ 0.00309) |
+
+Note that: Normal means manually tuned whereas Underline means fine-tuned models.
+
 ## Usage
 
 - Modify the dataset or features in the preprocessing section as needed.
@@ -85,8 +103,3 @@ To run this project locally, ensure you have Python installed and then follow th
 ## Contributing
 
 Contributions are welcome! Feel free to open an issue or submit a pull request.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
