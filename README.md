@@ -19,9 +19,9 @@ This repository contains a Jupyter Notebook implementing a machine learning mode
   - Supervised learning approach with deep learning models
   - CNN (Convolutional Neural Networks) for image classification
   - Data augmentation for better generalization
-  - Hyperparameter tuning using GridSearchCV
-  - Model evaluation with accuracy, precision, recall, and F1-score
-  - Transfer learning with pre-trained models such as ResNet and VGG16
+  - Hyperparameter tuning using Bayesian Optimization Tuner
+  - Model evaluation with weighted precision
+  - Transfer learning with pre-trained models such as ResNet, DenseNet and EfficientNet
 
 ## Development Pipeline
 
